@@ -1,11 +1,15 @@
 package com.fitnesstracker.FitnessTracker;
 
-public class IAppointmentService {
+import java.util.Optional;
+public interface IAppointmentService {
 	
-	void save(FitnessAppointment fitnessappointment) {
-	}
-	Iterable<FitnessAppointment> retrieveAllFitnessAppointment() {
-		return null;
+	void save(FitnessAppointment fitnessappointment);
+	Iterable<FitnessAppointment> retrieveAllFitnessAppointment();
+	Optional<FitnessAppointment> retrieveAppointment(long id);
+
+	void deleteAppointment(long id);
+	Optional<FitnessAppointment> retrieveFitnessAppointment(long id);
+		
 	}
 
-}
+

@@ -21,6 +21,7 @@ public class FitnessAppointment {
 	private String pack;
 	private byte weeks;
 	private double ammount;
+	
 	public long getId() {
 		return id;
 	}
