@@ -14,6 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.PutMapping;
+import com.fitnesstracker.FitnessTracker.FitnessAppointment;
+import com.fitnesstracker.FitnessTracker.AgeException;
+import com.fitnesstracker.FitnessTracker.AppointmentNotFoundException;
+import com.fitnesstracker.FitnessTracker.EmailException;
+import com.fitnesstracker.FitnessTracker.NameException;
+import com.fitnesstracker.FitnessTracker.PhoneException;
+
+
 @RestController
 public class AppointmentController {
 	
@@ -39,10 +48,20 @@ public class AppointmentController {
 	public void deleteAppointment(@PathVariable("id") long id) {
 		appointmentService.deleteAppointment(id);
 	}
+	
+	@PutMapping("/{id}")
+	public void updateFitnessAppointment(@PathVariable("id") long id, @RequestBody FitnessAppointment fitnessappointment) {
+		appointmentService.updateAppointment(id,fitnessappointment);
+	}
 
 	@ExceptionHandler(value = {AppointmentNotFoundException.class, EmptyResultDataAccessException.class })
 	public ResponseEntity<FitnessAppointment> exception(RuntimeException runtimeException) {
 		return new ResponseEntity<FitnessAppointment>(HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(value = { AgeException.class, EmailException.class,NameException.class, PhoneException.class })
+	public ResponseEntity<FitnessAppointment> exceptionValidation(RuntimeException runtimeException) {
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 
 }

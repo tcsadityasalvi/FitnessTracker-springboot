@@ -9,6 +9,7 @@ public interface IAppointmentService {
 
 	void deleteAppointment(long id);
 	Optional<FitnessAppointment> retrieveFitnessAppointment(long id);
+	void updateAppointment(long id, FitnessAppointment appointment);
 		
 	}
 
