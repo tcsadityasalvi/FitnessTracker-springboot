@@ -19,17 +19,7 @@ public class FitnessAppointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@NotBlank
-	@NotNull
-	private String name;
-	@NotNull
-	private byte age;
-	@NotNull
-	@Email
-	private String email;
-	@NotBlank
-	@NotNull
-	private String phoneNo;
+	
 	private String address;
 	private String trainerPreference;
 	private boolean Physio;

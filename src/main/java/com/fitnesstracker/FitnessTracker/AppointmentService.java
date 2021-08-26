@@ -52,14 +52,7 @@ public abstract class AppointmentService implements IAppointmentService {
 		if (!appointmentFromDB.isPresent())
 			throw new AppointmentNotFoundException("Appointment does not exist to update");
 		FitnessAppointment app1 = appointmentFromDB.get();
-		if (StringUtils.hasText(fitnessappointment.getName()))
-			app1.setName(fitnessappointment.getName());
-		if (fitnessappointment.getAge() > 0 && fitnessappointment.getAge() < 80)
-			app1.setAge(fitnessappointment.getAge());
-		if (StringUtils.hasText(fitnessappointment.getEmail()))
-			app1.setEmail(fitnessappointment.getEmail());
-		if (StringUtils.hasText(fitnessappointment.getPhoneNo()))
-			app1.setPhoneNo(fitnessappointment.getPhoneNo());
+		
 		if (StringUtils.hasText(fitnessappointment.getTrainerPreference()))
 			app1.setTrainerPreference(fitnessappointment.getTrainerPreference());
 		if (fitnessappointment.isPhysio() != app1.isPhysio())
