@@ -18,21 +18,21 @@ import lombok.Setter;
 @Setter
 @Getter
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@NotNull(message = "Name is compulsory")
-    @NotBlank(message = "Name is compulsory")
-    @Pattern(regexp = "[a-z-A-Z-' ']*", message = "Name has invalid characters")
+	@NotBlank(message = "Name is compulsory")
+	@Pattern(regexp = "[a-z-A-Z-' ']*", message = "Name has invalid characters")
 	private String name;
 	@NotNull
 	@Min(value = 18, message = "Age must be greater than or equal to 18")
-    @Max(value = 150, message = "Age must be less than or equal to 150")
+	@Max(value = 150, message = "Age must be less than or equal to 150")
 	private byte age;
-	@NotNull(message="Email Address is compulsory")
-    @NotBlank(message="Email Address is compulsory")
-    @Email(message = "Email Address is not a valid format")
+	@NotNull(message = "Email Address is compulsory")
+	@NotBlank(message = "Email Address is compulsory")
+	@Email(message = "Email Address is not a valid format")
 	private String email;
 	@NotBlank
 	@NotNull

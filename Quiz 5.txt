@@ -1,0 +1,31 @@
+Encapsulation
+
+1. (a,d,e)
+2. (b,d,f)
+3. None of the above
+4. None of the above
+5. (a,d)
+6. None of the above
+7. (c)
+8. None of the above
+9. None of the above
+10. GFC507
+
+___________________________________-
+
+garbage collection
+
+1. Prints: XXYY
+2. Indeterminate
+3. 9
+4. None of the above
+5. C
+6. 1
+7. None of the above
+8. A1A2A3A1
+9. B2
+10. Ba, B1, B2, Bb
+11. (a)
+
+
+
