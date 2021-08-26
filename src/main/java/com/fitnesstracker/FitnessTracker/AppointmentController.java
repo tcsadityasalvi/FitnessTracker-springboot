@@ -2,25 +2,21 @@ package com.fitnesstracker.FitnessTracker;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import com.fitnesstracker.FitnessTracker.FitnessAppointment;
-import com.fitnesstracker.FitnessTracker.AgeException;
-import com.fitnesstracker.FitnessTracker.AppointmentNotFoundException;
-import com.fitnesstracker.FitnessTracker.EmailException;
-import com.fitnesstracker.FitnessTracker.NameException;
-import com.fitnesstracker.FitnessTracker.PhoneException;
 
 
 @RestController
@@ -40,8 +36,9 @@ public class AppointmentController {
 	}
 	
 	@PostMapping("/fitnessappointments")
-	public void saveAppointment(@RequestBody FitnessAppointment appointment) {
+	public ResponseEntity<FitnessAppointment> saveAppointment(@RequestBody @Valid FitnessAppointment appointment) {
 		appointmentService.save(appointment);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/appointments/{id}")

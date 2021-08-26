@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.regex.Pattern;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 @Service
@@ -14,33 +14,14 @@ public abstract class AppointmentService implements IAppointmentService {
 	IAppointmentRepository appointmentRepository;
 	
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void save(FitnessAppointment fitnessappointment) {
-		validation(fitnessappointment);
+		
 		appointmentRepository.save(fitnessappointment);
 		System.out.println("Saved");
 	}
 	
-	private void validation(FitnessAppointment fitnessappointment) {
-		if (fitnessappointment.getName().length() < 6) 
-			throw new NameException("Name should be atleast 4 characters");
-		if(fitnessappointment.getName().isEmpty())
-			throw new NameException("Name field cannt be empty");
-		if (fitnessappointment.getAge() < 1 || fitnessappointment.getAge() > 100)
-			throw new AgeException("Enter Valid Age");
-		if (!emailValidation(fitnessappointment.getEmail()))
-			throw new EmailException("Enter Valid Email");
-		if (fitnessappointment.getPhoneNo().length() != 10) 
-			throw new PhoneException("Phone No should be 10 digits");
-		
-
-	}
-
-	private boolean emailValidation(String email) {
-		String emailRegex =  "^(.+)@(.+)$";
-
-		Pattern pat = Pattern.compile(emailRegex);
-		return pat.matcher(email).matches();
-	}
+	
 	
 	@Override
 	public Iterable<FitnessAppointment> retrieveAllFitnessAppointment() {
@@ -58,11 +39,14 @@ public abstract class AppointmentService implements IAppointmentService {
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteAppointment(long id) {
 		appointmentRepository.deleteById((int) id);
 	}
 	
 	@Override
+	@Transactional(rollbackFor = Exception.class)
+	
 	public void updateAppointment(long id, FitnessAppointment fitnessappointment) {
 		Optional<FitnessAppointment> appointmentFromDB = appointmentRepository.findById((int) id);
 		if (!appointmentFromDB.isPresent())
